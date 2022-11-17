@@ -42,3 +42,15 @@ def menuReportes():
          [0] Volver al menu principal
         '''
     )
+
+def menuActualizarEstadoDelTrabajador():
+    print(
+        f'''
+            \t Actualizar estado del trabajador
+
+            Seleccione una opcion
+
+            [1]Buscar trabajador segun DNI
+            [0]Volver al menu principal
+        '''
+    )

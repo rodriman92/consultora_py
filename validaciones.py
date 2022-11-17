@@ -6,3 +6,9 @@ def validarIngresoEntero(opcion):
         except ValueError:
             print("El valor ingresado no es un numero. Reintente")
     return entero
+
+
+def validarFormatoDNI(dni):
+    if len(f'{dni}') > 8:
+        print("El formato del DNI no es correcto")
+    
