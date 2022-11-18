@@ -1,4 +1,4 @@
-from validaciones import validarIngresoEntero
+from validaciones import validarIngresoEntero, validarFormatoDNI
 
 def obtenerTrabajadores(nombreArchivo):
   try:
@@ -10,8 +10,6 @@ def obtenerTrabajadores(nombreArchivo):
     archivo = open(nombreArchivo,"r")
 
 #Nombre,edad,dni,profesion,activo(true,false)
-
-
   trabajadores=[]
   for linea in archivo.readlines():
     trabajador=linea.replace('\n','') # "6Gato34"
@@ -26,14 +24,20 @@ def agregarTrabajador(listado):
   codigo = validarIngresoEntero("codigo: ")
   nombre=input("nombre: ")
   edad = validarIngresoEntero("Edad: ")
-  dni=validarIngresoEntero("dni: ")
-  profesion=input("profesion: ")
+  # Controlar que no se ingrese el mismo dni (FALTA)
+  dni=validarIngresoEntero("DNI: ")
+  validarFormatoDNI(dni)
+  profesion=input("profesion: ") # Ver si se puede controlar para que sea solo letras
+
   # Pone como estado true o false presionando la S o la N
   activo=input("Activo? Presione [S] para SI o [N] para NO: ")
+  activo = activo.upper()
   if activo == "S":
     activo = True
-  else:
+  elif activo == "N":
     activo = False
+  else:
+    print("La opcion no es correcta")
 
 
   # Crea al trabajador y lo guarda en el listado
@@ -59,6 +63,8 @@ def modificarTrabajador(listado, codigo):
         nombre = trabajador["nombre"]
       
       edad = validarIngresoEntero("Edad: ")
+      dni = validarIngresoEntero("DNI: ")
+      validarFormatoDNI(dni)
       profesion=input("profesion: ")
       ## EDITAADO ##
       # Pone como estado true o false presionando S o N
@@ -73,6 +79,25 @@ def modificarTrabajador(listado, codigo):
       trabajador["profesion"] = profesion
       trabajador["activo"]=activo
       break
+
+  # Guarda modificacion en archivo
+  
+  archivo = open("trabajadores.dat", "w")
+  contenido = []
+
+  for trabajador in listado:
+    linea = f"\n{trabajador['codigo']},{trabajador['nombre']}, {trabajador['edad']}, {trabajador['dni']}, {trabajador['profesion']}, {trabajador['activo']}"
+    contenido.append(linea)
+
+  contenido[0] = contenido[0].replace("\n", "")
+
+  archivo.writelines(contenido)
+
+  archivo.close()
+
+   
+
+  
 
 
 
@@ -94,8 +119,6 @@ def modificarStatusTrabajador(listado, dni):
       trabajador["activo"]=activo
       break
   print("El DNI No se encuentra registrado")
-
-
 
 
 

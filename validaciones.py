@@ -8,7 +8,8 @@ def validarIngresoEntero(opcion):
     return entero
 
 
+# Ver como pedir DNI de nuevo si esta mal
+
 def validarFormatoDNI(dni):
     if len(f'{dni}') > 8:
-        print("El formato del DNI no es correcto")
-    
+        print("El DNI fue ingresado correctamente")

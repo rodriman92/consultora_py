@@ -13,6 +13,7 @@ while True:
 
     if opcion == 0:
         opcionSalir = input("Está seguro que desea salir? [S]i/[N]o: ")
+        opcionSalir = opcionSalir.upper()
         if opcionSalir == "S":
             print("Saliendo...")
             break
@@ -20,7 +21,7 @@ while True:
             continue
         else:
             print("La opcion no es correcta. Reintente")
-            continue
+            # Ver si se puede volver a preguntar si desea salir
 
     elif opcion == 1:
         decorar()
