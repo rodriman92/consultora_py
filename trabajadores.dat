@@ -1,4 +1,5 @@
 1,Maria, 22, 34567567, gamer, True
-2,dos, 2, 22222222,  dosdos,  True
-44,RODRIGO, 30, 36769831,  PROGRAMADOR,  True
-123,Jose, 30, 2365478999,  medico,  False
+2,dos, 2, 22222222, dosdos, True
+44,Juan, 29, 36769831, jugador, False
+123,Lucas, 30, 32456987, Medico, True
+325,Rodrigo, 30, 36769831, programador, False

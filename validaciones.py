@@ -12,4 +12,6 @@ def validarIngresoEntero(opcion):
 
 def validarFormatoDNI(dni):
     if len(f'{dni}') > 8:
-        print("El DNI fue ingresado correctamente")
+        print("El DNI debe contener como maximo 8 numeros")
+        return
+    

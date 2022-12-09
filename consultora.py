@@ -2,8 +2,9 @@ from validaciones import validarIngresoEntero, validarFormatoDNI
 from decoraciones import decorar
 from ABMTrabajadores import agregarTrabajador,modificarTrabajador,obtenerTrabajadores, eliminarTrabajador,modificarStatusTrabajador
 from menues import menuPrincipal, menuGestionTrabajador, menuReportes,menuActualizarEstadoDelTrabajador
+from reportes import trabajadores_activos, trabajadores_inactivos, desocupados_por_rango, trabajadores_por_profesion
 
-listadoDePersonas = obtenerTrabajadores("trabajadores.dat")
+listadoDePersonas = obtenerTrabajadores()
 
 while True:
 
@@ -21,7 +22,6 @@ while True:
             continue
         else:
             print("La opcion no es correcta. Reintente")
-            # Ver si se puede volver a preguntar si desea salir
 
     elif opcion == 1:
         decorar()
@@ -33,15 +33,15 @@ while True:
                 break
             elif opcionGestionTrabajador == 1:
                 print("Ingresar nuevo trabajador")
-                agregarTrabajador(listadoDePersonas)
+                agregarTrabajador()
             elif opcionGestionTrabajador == 2:
                 print("Modificar datos de trabajador")
-                codigo=validarIngresoEntero("Codigo del trabajador a modificar: ")
-                modificarTrabajador(listadoDePersonas,codigo)
+                id=validarIngresoEntero("Ingrese el ID del trabajador a modificar: ")
+                modificarTrabajador(id)
             elif opcionGestionTrabajador == 3:
                 print("Eliminar trabajador")
-                codigo=validarIngresoEntero("codigo del trabajador a eliminar: ")
-                eliminarTrabajador(listadoDePersonas,codigo)
+                id=validarIngresoEntero("Ingrese el ID del trabajador a eliminar: ")
+                eliminarTrabajador(id)
             else:
                 print("La opcion no es correcta. Reintente")
                 continue
@@ -56,12 +56,19 @@ while True:
                 break
             elif opcionReportes == 1:
                 print("Mostrando reporte de trabajadores activos")
+                trabajadores_activos()
             elif opcionReportes == 2:
                 print("Mostrando reporte de personas desocupadas")
+                trabajadores_inactivos()
             elif opcionReportes == 3:
                 print("Mostrando reporte de desocupados por rango de edad")
+                edadMin = validarIngresoEntero("Ingrese una edad minima: ")
+                edadMax = validarIngresoEntero("Ingrese una edad maxima: ")
+                desocupados_por_rango(edadMin, edadMax)
             elif opcionReportes == 4:
                 print("Mostrando reporte de trabajadores por profesion")
+                profesion=input("Ingrese la profesion: ")
+                trabajadores_por_profesion(profesion)
             else:
                 print("La opcion ingresada no es valida. Reintente")
                 continue
@@ -75,11 +82,8 @@ while True:
             if opcionActualizarEstadoDelTrabajador == 1:
                 print("Modificar status del trabajador")
                 dni=validarIngresoEntero("DNI del trabajador a modificar: ")
-                # Valida el formato del DNI que sean numero y como max 8 
-                validarFormatoDNI(dni)
-                modificarStatusTrabajador(listadoDePersonas,dni)
+                modificarStatusTrabajador(dni)
 
-            # print(opcionActualizarEstadoDelTrabajador == 1)#esto iria como validacion pero en otra parte?? aca hay que ver como pasar solo true o false
             elif opcionActualizarEstadoDelTrabajador == 0:
                 break
             else:
